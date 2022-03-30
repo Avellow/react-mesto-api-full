@@ -1,0 +1,8 @@
+.form__input-error_active {
+  display: inline-block;
+  margin-bottom: 13px;
+}
+
+.form__input-error_active:last-of-type {
+  margin-bottom: 31px;
+}

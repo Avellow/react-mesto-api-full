@@ -1,0 +1,9 @@
+.header__menu-dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding-bottom: 40px;
+    width: 100%;
+    border-bottom: 1px solid rgba(84, 84, 84, .7);
+}

@@ -1,0 +1,17 @@
+.sign-form {
+    color: white;
+    background-color: inherit;
+    padding: 60px 10px 15px;
+    display: flex;
+    /*flex: 1 1 auto;*/
+    flex-direction: column;
+    align-items: center;
+    min-width: 358px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 570px) {
+    .sign-form {
+        min-width: min(calc(260/320 * 100%), 358px);
+    }
+}

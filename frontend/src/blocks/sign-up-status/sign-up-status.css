@@ -1,0 +1,17 @@
+.sign-up-status {
+    background-color: white;
+    width: 430px;
+    height: 330px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 570px) {
+    .sign-up-status {
+        width: min(calc(280/320 * 100%), 430px);
+        height: 308px;
+    }
+}

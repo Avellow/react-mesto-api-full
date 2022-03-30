@@ -1,0 +1,13 @@
+.form {
+  background-color: white;
+  border-radius: 10px;
+  padding: 34px 36px 37px;
+  width: 358px;
+}
+
+@media screen and (max-width: 570px) {
+  .form {
+    padding: 25px 22px;
+    width: min(calc(238/320 * 100vw), 358px);
+  }
+}

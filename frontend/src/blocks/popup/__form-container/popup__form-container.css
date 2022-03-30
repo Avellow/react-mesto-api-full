@@ -1,0 +1,12 @@
+.popup__form-container {
+  color: black;
+  position: relative;
+  min-width: 430px;
+}
+
+@media screen and (max-width: 550px) {
+  .popup__form-container {
+    width: min(calc(100% * (282/320)), 400px);
+    min-width: 282px;
+  }
+}

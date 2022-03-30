@@ -1,0 +1,19 @@
+.menu__link {
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 1.21;
+    color: #fff;
+    transition: opacity 0.3s ease;
+}
+
+.menu__link:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 570px) {
+    .menu__link {
+        margin: 0 0 40px;
+        font-size: 14px;
+    }
+}
