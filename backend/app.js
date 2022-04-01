@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const auth = require('./middlewares/auth');
 const { login, createUser } = require('./controllers/user');
 const errorHandler = require('./middlewares/errorHandler');
@@ -10,6 +11,11 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 const app = express();
+
+app.use(cors({
+  origin: 'https://mestofront12.students.nomoredomains.work',
+  credentials: true,
+}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
