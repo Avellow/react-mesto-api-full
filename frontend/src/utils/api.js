@@ -47,26 +47,6 @@ class Api {
             .then(this._checkResult)
     }
 
-    likeCard(id) { //to delete
-        return fetch(`${this._serverUrl}/${this._groupId}/cards/${id}/likes`, {
-            method: 'PUT',
-            headers: {
-                authorization: this._token
-            },
-        })
-            .then(this._checkResult)
-    }
-
-    dislikeCard(id) { // to delete
-        return fetch(`${this._serverUrl}/${this._groupId}/cards/${id}/likes`, {
-            method: 'DELETE',
-            headers: {
-                authorization: this._token
-            },
-        })
-            .then(this._checkResult)
-    }
-
     deleteCard(id) {
         return fetch(`${this._serverUrl}/${this._groupId}/cards/${id}`, {
             method: 'DELETE',
