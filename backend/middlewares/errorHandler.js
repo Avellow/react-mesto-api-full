@@ -9,8 +9,6 @@ const errorHandler = (err, req, res, next) => {
     .send({
       message: `${statusCode} ${message}`,
     });
-
-  return next();
 };
 
 module.exports = errorHandler;
