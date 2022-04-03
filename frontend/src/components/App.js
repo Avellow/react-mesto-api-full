@@ -47,8 +47,8 @@ function App() {
             const jwt = localStorage.getItem('jwt');
             setIsFetching(true);
             auth.checkToken(jwt)
-                .then(({data}) => {
-                    setCurrentUser(prevUserInfo => ({...prevUserInfo, email: data.email}));
+                .then((user) => {
+                    setCurrentUser(prevUserInfo => ({...prevUserInfo, ...user}));
                     setLoggedIn(true);
                     history.push('/');
                 })
@@ -63,7 +63,7 @@ function App() {
             Promise.all([api.getUserInfo(), api.getInitialCards()])
                 .then(([user, cards]) => {
                     setCurrentUser(prevUserInfo => ({...prevUserInfo, ...user}));
-                    setCards(cards);
+                    setCards(cards.reverse());
                 })
                 .catch(err => console.log(`${err} не удалось получить данные с сервера`));
         }
@@ -78,13 +78,12 @@ function App() {
         window.addEventListener('resize', handleResize);
 
         return () => window.removeEventListener('resize', handleResize);
-        //Знаю, что запрещено обращаться к ревьюерам, но хочу
-        //выразить Вам большую БЛАГОДАРНОСТЬ за Вашу работу! Спасибо! Очень познавательно!
+
     }, [currentWindowWidth])
 
     //хендлеры для карточки
     function handleCardLike(card) {
-        const isLiked = card.likes.some(i => i._id === userId);
+        const isLiked = card.likes.some(i => i === userId);
         api.changeLikeCardStatus(card._id, isLiked)
             .then(newCard => {
                 setCards(prevState => prevState.map(c => c._id === card._id ? newCard : c));
@@ -187,6 +186,7 @@ function App() {
             .then((data) => {
                 if (data.token) {
                     localStorage.setItem('jwt', data.token);
+                    api.setToken(`Bearer ${data.token}`);
                     setLoggedIn(true);
                     history.push('/');
                 }
