@@ -6,7 +6,7 @@ const NotFoundError = require('../errors/NotFoundError');
 module.exports.getUsers = (req, res, next) => {
   User
     .find({})
-    .then((users) => res.send({ data: users }))
+    .then((users) => res.send(users))
     .catch(next);
 };
 
@@ -16,7 +16,7 @@ module.exports.getUser = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError('Запрашиваемый пользователь не найден');
     })
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch(next);
 };
 
@@ -40,7 +40,7 @@ module.exports.createUser = (req, res, next) => {
         password: hash,
       }))
     .then(({ _id }) => User.findById(_id))
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((e) => {
       if (e.code === 11000) {
         const err = new Error('Пользователь с таким email уже существует!');
@@ -67,7 +67,7 @@ module.exports.updateUser = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError('Не удалось обновить информацию о пользователе, т.к. он не найден в базе данных ');
     })
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch(next);
 };
 
@@ -87,7 +87,7 @@ module.exports.updateAvatar = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError('Не удалось обновить аватар пользователя');
     })
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch(next);
 };
 
@@ -110,6 +110,6 @@ module.exports.getCurrentUser = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError('Запрашиваемый пользователь не найден');
     })
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch(next);
 };
