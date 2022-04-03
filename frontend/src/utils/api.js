@@ -101,7 +101,7 @@ class Api {
 }
 
 const api = new Api({
-    serverUrl: 'http://127.0.0.1:3000',
+    serverUrl: 'https://api.mestofront12.students.nomoredomains.xyz',
     token: `Bearer ${localStorage.getItem('jwt')}`,
 });
 
