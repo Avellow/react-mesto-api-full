@@ -12,8 +12,8 @@ function Card(props) {
 
     const { _id } = useContext(CurrentUserContext);
 
-    const isOwn = card.owner._id === _id;
-    const isLiked = card.likes.some(i => i._id === _id);
+    const isOwn = card.owner === _id;
+    const isLiked = card.likes.some(i => i === _id);
 
     const cardLikeButtonClass = (
         `place__like-button ${isLiked
