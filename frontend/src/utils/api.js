@@ -1,8 +1,11 @@
 class Api {
-    constructor({serverUrl, token, groupId}) {
+    constructor({serverUrl, token}) {
         this._serverUrl = serverUrl;
         this._token = token;
-        this._groupId = groupId;
+    }
+
+    setToken(jwt) {
+        this._token = jwt;
     }
 
     _checkResult(res) {
@@ -12,7 +15,7 @@ class Api {
     }
 
     getInitialCards() {
-        return fetch(`${this._serverUrl}/${this._groupId}/cards`, {
+        return fetch(`${this._serverUrl}/cards`, {
             method: 'GET',
             headers: {
                 authorization: this._token,
@@ -22,7 +25,7 @@ class Api {
     }
 
     postNewCard({name, link}) {
-        return fetch(`${this._serverUrl}/${this._groupId}/cards`, {
+        return fetch(`${this._serverUrl}/cards`, {
             method: 'POST',
             headers: {
                 authorization: this._token,
@@ -38,7 +41,7 @@ class Api {
 
     changeLikeCardStatus(id, isLiked) {
         const method = isLiked ? 'DELETE' : 'PUT';
-        return fetch(`${this._serverUrl}/${this._groupId}/cards/${id}/likes`, {
+        return fetch(`${this._serverUrl}/cards/${id}/likes`, {
             method,
             headers: {
                 authorization: this._token
@@ -48,7 +51,7 @@ class Api {
     }
 
     deleteCard(id) {
-        return fetch(`${this._serverUrl}/${this._groupId}/cards/${id}`, {
+        return fetch(`${this._serverUrl}/cards/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: this._token
@@ -58,7 +61,7 @@ class Api {
     }
 
     getUserInfo() {
-        return fetch(`${this._serverUrl}/${this._groupId}/users/me`, {
+        return fetch(`${this._serverUrl}/users/me`, {
             method: 'GET',
             headers: {
                 authorization: this._token
@@ -68,7 +71,7 @@ class Api {
     }
 
     postUserInfo({ name, about }) {
-        return fetch(`${this._serverUrl}/${this._groupId}/users/me`, {
+        return fetch(`${this._serverUrl}/users/me`, {
             method: 'PATCH',
             headers: {
                 authorization: this._token,
@@ -83,7 +86,7 @@ class Api {
     }
 
     updateAvatar(avatar) {
-        return fetch(`${this._serverUrl}/${this._groupId}/users/me/avatar`, {
+        return fetch(`${this._serverUrl}/users/me/avatar`, {
             method: 'PATCH',
             headers: {
                 authorization: this._token,
@@ -98,9 +101,8 @@ class Api {
 }
 
 const api = new Api({
-    serverUrl: 'https://mesto.nomoreparties.co/v1',
-    token: '56783857-c2a8-4fa7-a04b-c7f5824d8c44',
-    groupId: 'cohort-32'
+    serverUrl: 'http://127.0.0.1:3000',
+    token: `Bearer ${localStorage.getItem('jwt')}`,
 });
 
 export {api};
