@@ -5,7 +5,7 @@ const PermissionError = require('../errors/PermissionError');
 module.exports.getCards = (req, res, next) => {
   Card
     .find({})
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => res.send(cards))
     .catch(next);
 };
 
@@ -14,7 +14,7 @@ module.exports.createCard = (req, res, next) => {
 
   Card
     .create({ name, link, owner: req.user._id })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch(next);
 };
 
@@ -47,7 +47,7 @@ module.exports.likeCard = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError(`Не удалось лайкнуть. Карточка с id ${req.params.cardId} не найдена в базе данных!`);
     })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch(next);
 };
 
@@ -61,6 +61,6 @@ module.exports.dislikeCard = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError(`Не удалость убрать лайк. Карточка с id ${req.params.cardId} не найдена в базе данных!`);
     })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch(next);
 };
