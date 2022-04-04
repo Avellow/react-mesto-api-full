@@ -4,6 +4,8 @@ const errorHandler = (err, req, res, next) => {
     message = 'Произошла ошибка на сервере',
   } = err;
 
+  console.log(err.stack || err);
+
   res
     .status(statusCode)
     .send({
