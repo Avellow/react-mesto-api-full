@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const TokenCheckError = require('../errors/TokenCheckError');
 const AuthError = require('../errors/AuthError');
 
+const { JWT_SECRET } = process.env;
+
 const extractBearerHeader = (header) => header.replace('Bearer ', '');
 
 module.exports = (req, res, next) => {
@@ -15,7 +17,7 @@ module.exports = (req, res, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, 'some-secret');
+    payload = jwt.verify(token, JWT_SECRET);
   } catch (e) {
     next(new TokenCheckError('Некорректный токен'));
   }
