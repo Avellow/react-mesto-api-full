@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const TokenCheckError = require('../errors/TokenCheckError');
 const AuthError = require('../errors/AuthError');
 
-const { JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const extractBearerHeader = (header) => header.replace('Bearer ', '');
 
@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, JWT_SECRET);
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
   } catch (e) {
     next(new TokenCheckError('Некорректный токен'));
   }
